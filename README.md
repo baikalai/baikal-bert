@@ -2,9 +2,9 @@
 
 - deeq-bert는 baikal.ai가 개발하고 있는 pre-trained BERT 모델입니다.
 - 한국어 위키, 1990~2020 네이버 뉴스 등을 포함한 다양한 말뭉치를 정제하여 학습합니다.
-- 모델은 huggingface에 deeq/dbert, deeq/dbert5로 등록되어 있어서 transformers 를 이용해 간편하게 사용할 수 있습니다.
+- 모델은 huggingface에 deeq/dbert, deeq/dbert5로 공개되어있어 transformers 라이브러리로 간편하게 사용할 수 있습니다.
 - dbert는 BertTokenizer(wordpiece)를 그대로 사용하므로 BERT 모델을 사용하는 코드에서 쉽게 불러쓸 수 있습니다.
-- dbert5는 deeqnlp 형태소 분석기를 사용한 DeeqTokenizer를 사용해서 만든 50000 크기의 vocab을 사용합니다.
+- dbert5는 deeqnlp 형태소 분석기를 사용한 DeeqTokenizer와 50000 크기의 vocab을 사용합니다.
 
 # files
 
