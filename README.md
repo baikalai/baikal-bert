@@ -1,18 +1,14 @@
 # deeq-bert
 
-이 프로젝트는 huggingface에 등록되어있는 deeq/dbert, deeq/dbert5의 사용법을 설명하고 있습니다.
-
-deeq-bert 시리즈는 baikal.ai가 만들고 있는 pre-trained transformer 모델중 BERT를 기반으로한 모델입니다.
-
-모델들은 같은 말뭉치를 사용해 학습하고 있고, 이름은 사용하는 토크나이저와 vocab의 차이에 따라 구분됩니다.
-
-- deeq-bert: BertTokenizer(Wordpiece)를 사용하므로 모든 BERT 모델을 사용하는 작업에 쉽게 적용할 수 있습니다.
-
-- deeq-bert5: deeqnlp 토크나이저와 그것으로 제작된 50000크기의 vocab을 사용합니다. 정확한 형태소 분석기 기반이므로 한국어 과제에 더 적합한 모델입니다.
+- deeq-bert는 baikal.ai가 개발하고 있는 pre-trained BERT 모델입니다.
+- 한국어 위키, 1990~2020 네이버 뉴스 등을 포함한 다양한 말뭉치를 정제하여 학습합니다.
+- 모델은 huggingface에 deeq/dbert, deeq/dbert5로 등록되어 있어서 transformers 를 이용해 간편하게 사용할 수 있습니다.
+- dbert는 BertTokenizer(wordpiece)를 그대로 사용하므로 BERT 모델을 사용하는 코드에서 쉽게 불러쓸 수 있습니다.
+- dbert5는 deeqnlp 형태소 분석기를 사용한 DeeqTokenizer를 사용해서 만든 50000 크기의 vocab을 사용합니다.
 
 # files
 
-- example.py: huggingface의 transformers를 사용하여 deeq/dbert를 쉽게 실행할 수 있는 첫번째 예를 보여줍니다.
+- example.py: huggingface의 transformers를 사용하여 deeq/dbert를 불러오는 단순한 예를 보여줍니다.
 
 코드 한(?) 줄이면
 ```
@@ -31,4 +27,4 @@ result = nlp("대한민국은 민주[MASK]입니다")
 
 # todo
 
-deeq-bert5, deeq-bert을 실제 사용할 수 있는 샘플 코드들을 추가할 예정입니다.
+dbert5 토크나이저 코드와 함께 몇가지 샘플 코드들을 추가할 예정입니다.
