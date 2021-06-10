@@ -14,7 +14,7 @@ dbert 시리즈는 baikal.ai가 만들고 있는 pre-trained transformer 모델�
 
 - example.py: huggingface의 transformers를 사용하여 deeq/dbert를 쉽게 실행할 수 있는 첫번째 예를 보여줍니다.
 
-코드 한 줄이면
+코드 한(?) 줄이면
 ```
 from transformers import pipeline
 nlp = pipeline("fill-mask", model="deeq/dbert")
