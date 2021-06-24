@@ -31,14 +31,14 @@ result = nlp("서울은 한국의 [MASK]입니다.")
 {'sequence': '서울은 한국의 중심 입니다.', 'score': 0.02802455797791481, 'token': 2426, 'token_str': '중심'}
 ```
 
-- dbert5.py: 토크나이저를 읽어서 pipeline을 생성해주면 위와 같습니다.
+- dbert5.py: 자체 토크나이저를 사용한 pipeline을 생성해주면 됩니다.
 ```
 model = BertForMaskedLM.from_pretrained("deeq/dbert5")
 tokenizer = DeeqTokenizer("vocab-deeq.txt")
 nlp = FillMaskPipeline(model, tokenizer)
 result = nlp("서울은 한국의 [MASK]입니다.")
 ```
-거의 비슷한 결과입니다. 형태소 분석한 흔적이 보입니다.
+거의 비슷한 결과입니다. 토크나이징이 한글 형태소 구분으로 되어 있는 것을 알 수 있습니다.
 ```
 {'sequence': '서울 은 한국 의 수도 이 ㅂ니다.', 'score': 0.4248102903366089, 'token': 22588, 'token_str': '수 도'}
 {'sequence': '서울 은 한국 의 땅 이 ㅂ니다.', 'score': 0.0505908727645874, 'token': 647, 'token_str': '땅'}
