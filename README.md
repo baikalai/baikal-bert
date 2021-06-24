@@ -8,23 +8,41 @@
 
 # files
 
-- example.py: huggingface의 transformers를 사용하여 deeq/dbert를 불러오는 단순한 예를 보여줍니다.
+- dbert.py: huggingface의 transformers를 사용하여 deeq/dbert를 불러오는 단순한 예를 보여줍니다.
+- dbert5.py: deeqnlp tokenizer로 만든 bert를 transformers로 사용하는 예시입니다.
+- deeqtoken.py: deeqnlp로 tokenize 처리하는 코드입니다.
+- tokenization_dq.py: tokenizers와 호환되게 만든 DeeqTokenizer 입니다.
+- vocab-bert.txt: wordpiece로 만들어진 vocab(dbert)
+- vocab-deeq.txt: 형태소 분석기(deeqnlp)로 만들어진 vocab(dbert5)
 
-코드 한(?) 줄이면
+# sample runs
+
+- dbert.py: 내장된 토크나이저를 사용하기때문에 한줄로 결과가 나옵니다.
 ```
-from transformers import pipeline
 nlp = pipeline("fill-mask", model="deeq/dbert")
-result = nlp("대한민국은 민주[MASK]입니다")
+result = nlp("서울은 한국의 [MASK]입니다.")
 ```
-이렇게 결과가 나옵니다.
+이렇게...
 ```
-{'sequence': '대한민국은 민주공화국 입니다', 'score': 0.9752267599105835, 'token': 16831, 'token_str': '##공화국'}
-{'sequence': '대한민국은 민주국가 입니다', 'score': 0.01182450819760561, 'token': 5683, 'token_str': '##국가'}
-{'sequence': '대한민국은 민주사회 입니다', 'score': 0.0010573873296380043, 'token': 2641, 'token_str': '##사회'}
-{'sequence': '대한민국은 민주정부 입니다', 'score': 0.0009071531821973622, 'token': 2505, 'token_str': '##정부'}
-{'sequence': '대한민국은 민주혁명 입니다', 'score': 0.0006644993554800749, 'token': 8764, 'token_str': '##혁명'}
+{'sequence': '서울은 한국의 수도 입니다.', 'score': 0.32904720306396484, 'token': 2443, 'token_str': '수도'}
+{'sequence': '서울은 한국의 심장 입니다.', 'score': 0.06646282970905304, 'token': 9176, 'token_str': '심장'}
+{'sequence': '서울은 한국의 땅 입니다.', 'score': 0.056068792939186096, 'token': 332, 'token_str': '땅'}
+{'sequence': '서울은 한국의 도시 입니다.', 'score': 0.03166551515460014, 'token': 2679, 'token_str': '도시'}
+{'sequence': '서울은 한국의 중심 입니다.', 'score': 0.02802455797791481, 'token': 2426, 'token_str': '중심'}
 ```
 
-# todo
-
-dbert5 토크나이저 코드와 함께 몇가지 샘플 코드들을 추가할 예정입니다.
+- dbert5.py: 토크나이저를 읽어서 pipeline을 생성해주면 위와 같습니다.
+```
+model = BertForMaskedLM.from_pretrained("deeq/dbert5")
+tokenizer = DeeqTokenizer("vocab-deeq.txt")
+nlp = FillMaskPipeline(model, tokenizer)
+result = nlp("서울은 한국의 [MASK]입니다.")
+```
+거의 비슷한 결과입니다. 형태소 분석한 흔적이 보입니다.
+```
+{'sequence': '서울 은 한국 의 수도 이 ㅂ니다.', 'score': 0.4248102903366089, 'token': 22588, 'token_str': '수 도'}
+{'sequence': '서울 은 한국 의 땅 이 ㅂ니다.', 'score': 0.0505908727645874, 'token': 647, 'token_str': '땅'}
+{'sequence': '서울 은 한국 의 도시 이 ㅂ니다.', 'score': 0.0380173921585083, 'token': 22190, 'token_str': '도 시'}
+{'sequence': '서울 은 한국 의 고향 이 ㅂ니다.', 'score': 0.030805835500359535, 'token': 24598, 'token_str': '고 향'}
+{'sequence': '서울 은 한국 의 자랑 이 ㅂ니다.', 'score': 0.0296196099370718, 'token': 23795, 'token_str': '자 랑'}
+```
