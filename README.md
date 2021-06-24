@@ -6,7 +6,7 @@
 - dbert는 BertTokenizer(wordpiece)를 그대로 사용하므로 BERT 모델을 사용하는 코드에서 쉽게 불러쓸 수 있습니다.
 - dbert**5**는 deeqnlp 형태소 분석기를 사용한 DeeqTokenizer와 **5**0000 크기의 vocab을 사용합니다.
 
-# files
+## files
 
 - dbert.py: huggingface의 transformers를 사용하여 deeq/dbert를 불러오는 단순한 예를 보여줍니다.
 - dbert5.py: deeqnlp tokenizer로 만든 bert를 transformers로 사용하는 예시입니다.
@@ -15,7 +15,7 @@
 - vocab-bert.txt: wordpiece로 만들어진 vocab(dbert)
 - vocab-deeq.txt: 형태소 분석기(deeqnlp)로 만들어진 vocab(dbert5)
 
-# sample runs
+## sample runs
 
 - dbert.py: 모델의 기본 토크나이저를 사용하기때문에 한줄로 결과가 나옵니다.
 ```
@@ -47,6 +47,6 @@ result = nlp("서울은 한국의 [MASK]입니다.")
 {'sequence': '서울 은 한국 의 자랑 이 ㅂ니다.', 'score': 0.0296196099370718, 'token': 23795, 'token_str': '자 랑'}
 ```
 
-# works to do
+## works to do
 - 잘 정제된 구어체 말뭉치를 추가 학습하여 말을 더 잘 알아 듣게 만듭니다.
 - 특정 NLU 태스크에 특화된 학습 모델도 만들 예정입니다. (예: deeq-bert-ner)
