@@ -17,7 +17,7 @@
 
 # sample runs
 
-- dbert.py: 내장된 토크나이저를 사용하기때문에 한줄로 결과가 나옵니다.
+- dbert.py: 모델의 기본 토크나이저를 사용하기때문에 한줄로 결과가 나옵니다.
 ```
 nlp = pipeline("fill-mask", model="deeq/dbert")
 result = nlp("서울은 한국의 [MASK]입니다.")
